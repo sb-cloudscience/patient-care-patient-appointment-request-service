@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'coach.cloudscience.patient-care'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.SR3")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-cloud-connectors'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-pubsub'
+	implementation 'org.springframework.cloud:spring-cloud-starter'
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+	implementation 'org.springframework.cloud:spring-cloud-starter-oauth2'
+	implementation 'org.springframework.cloud:spring-cloud-starter-open-service-broker:3.1.0.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-security'
+	implementation 'org.springframework.cloud:spring-cloud-starter-task'
+	implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
